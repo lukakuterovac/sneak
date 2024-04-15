@@ -10,7 +10,7 @@ interface HeaderProps {
 const Header = ({ className }: HeaderProps) => (
   <header className={className}>
     <Link
-      className="w-1/3 text-xl font-bold text-violet-500 md:text-2xl"
+      className="w-1/3 text-xl font-bold text-violet-500 sm:text-2xl"
       href="/"
     >
       Sneak.

@@ -36,7 +36,7 @@ export default function RootLayout({
           disableTransitionOnChange={true}
         >
           <Header className="flex w-full items-center border-b border-secondary px-6 py-4 md:px-8" />
-          <main className="mx-auto my-4 min-w-[300px] max-w-screen-2xl sm:my-8">
+          <main className="flex w-full min-w-[300px] max-w-screen-2xl grow flex-col items-center p-4 sm:p-8">
             {children}
           </main>
           <Footer className="mt-auto flex w-full flex-col items-center border border-secondary py-10" />

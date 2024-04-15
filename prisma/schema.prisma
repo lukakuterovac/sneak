@@ -8,12 +8,13 @@ datasource db {
 }
 
 model Product {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  isUsed    Boolean
-  name      String
-  price     Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  imageUrl    String
+  price       Float
+  createdAt   DateTime @db.Date
+  updatedAt   DateTime @db.Date
 
   @@map("products")
 }

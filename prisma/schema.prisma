@@ -13,8 +13,21 @@ model Product {
   description String
   imageUrl    String
   price       Float
-  createdAt   DateTime @db.Date
-  updatedAt   DateTime @db.Date
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("products")
+}
+
+// Authentication
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
 }

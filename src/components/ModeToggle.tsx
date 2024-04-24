@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
+import { Loader2, Moon, Sun } from "lucide-react";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 interface ModeToggleProps {
   variant: "dropdownButton" | "none";
@@ -19,7 +20,11 @@ const ModeToggle = ({ className, variant }: ModeToggleProps) => {
   }, []);
 
   if (!mounted) {
-    return null;
+    return (
+      <Button variant="ghost" className={cn("animate-spin", className)}>
+        <Loader2 className="h-3 antialiased sm:h-4" />
+      </Button>
+    );
   }
 
   const toggleTheme = () => {

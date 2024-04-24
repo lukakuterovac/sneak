@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { useRouter, usePathname } from "next/navigation";
+import { useAuth } from "@/components/AuthProvider";
+import { protectedRoutes, redirectToLogin } from "@/middleware";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -16,11 +19,19 @@ export const metadata: Metadata = {
   description: "Sneak sneaker store",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
+  const { user, isAuthenticated, handleLogout } = useAuth();
+
+  if (!isAuthenticated && protectedRoutes.includes(router.usePathname()) {
+    redirectToLogin(router);
+    return null;
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -29,6 +40,7 @@ export default function RootLayout({
           "flex min-h-screen flex-col items-center",
         )}
       >
+        {/* <SessionProvider> */}
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -41,6 +53,7 @@ export default function RootLayout({
           </main>
           <Footer className="mt-auto flex w-full flex-col items-center border border-secondary py-10" />
         </ThemeProvider>
+        {/* </SessionProvider> */}
       </body>
     </html>
   );
